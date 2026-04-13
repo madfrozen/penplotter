@@ -13,15 +13,6 @@ if not IN_DOCKER:
     print("Running from OS")
     LOCK_FILE = "/tmp/penplotter_initialized"
     files = glob.glob("/home/arduino/ArduinoApps/penplotter/PlotJobs/*.gcode")
-    """if not os.path.exists(LOCK_FILE):
-        print("Uploading to MCU")
-        result = subprocess.run(["arduino-cli", "upload", "--fqbn", "arduino:zephyr:unoq", "--port", "/dev/ttyHS1", "/home/arduino/ArduinoApps/penplotter/sketch"])
-        if result.returncode == 0:
-            open(LOCK_FILE, 'w').close()
-        else:
-            print("Upload failed, exiting")
-            sys.exit(1)
-    """
 else:
     print("Running from App-Lab")
     files = glob.glob("/app/PlotJobs/*.gcode")
