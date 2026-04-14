@@ -79,6 +79,7 @@ void loop()
     current_timer = timer_length;
     digitalWrite(ENABLE_A, HIGH);
     digitalWrite(ENABLE_B, HIGH);
+    digitalWrite(PEN,LOW);
   }
   else
   {
@@ -101,6 +102,11 @@ String parseGcode(String line)
     return M03();
   else if (line.startsWith("M05")||line.startsWith("M5"))
     return M05();
+  else if (line.startsWith("G21"))
+    return "ok";
+  else if (line.startsWith("G90"))
+    return "ok";
+  
   
 }
 
