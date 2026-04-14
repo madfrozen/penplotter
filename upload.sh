@@ -1,0 +1,1 @@
+arduino-cli compile --fqbn arduino:zephyr:unoq --port /dev/ttyHS1 ~/ArduinoApps/penplotter/sketch && arduino-cli upload --fqbn arduino:zephyr:unoq --port /dev/ttyHS1 ~/ArduinoApps/penplotter/sketch

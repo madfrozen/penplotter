@@ -25,9 +25,9 @@ const int max_y = 235; // in mm
 const int max_x = 265; // in mm
 bool absolute_mode = true;
 
-long timer_length = 3000; // in milliseconds
+long timer_length = 10000; // in milliseconds
 bool is_timed_out = true;
-long current_timer = 3000;
+long current_timer = timer_length;
 long last_time = 0;
 long current_time = millis();
 long delta = 0;
@@ -103,7 +103,7 @@ String parseGcode(String line)
     return G90();
   else if (line.startsWith("G91"))
     return G91();
-  else return "Unkown GCODE";
+  else return "Unknown GCODE";
   
 }
 
@@ -130,6 +130,7 @@ String Gmove(String line, bool speed_flag)
   pos[1] = (dx - dy) * steps_p_mm;
   multiStepper.moveTo(pos);
   multiStepper.runSpeedToPosition();
+  current_timer = 0;
   return "ok";
 }
 
