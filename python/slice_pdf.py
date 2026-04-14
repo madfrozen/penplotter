@@ -31,12 +31,10 @@ def apply_matrix(matrix, x, y):
     a, b, c, d, e, f = matrix
     return (a*x + c*y + e, b*x + d*y + f)
 
+HERSHEY_EM = 35.0
+HERSHEY_BASELINE = 9.0  # shift up by the descender amount
+
 def hershey_char_to_path(char, matrix):
-    """
-    Look up a character in the Hershey futural font and return an SVG
-    path `d` string with the matrix transform applied.
-    Returns None if no glyph is found.
-    """
     try:
         strokes = list(hf.strokes_for_text(char))
     except Exception:
@@ -51,7 +49,9 @@ def hershey_char_to_path(char, matrix):
             continue
         first = True
         for x, y in stroke:
-            tx, ty = apply_matrix(matrix, x, y)
+            # Normalize to 0..1 space before applying PDF matrix and flip y axis
+            nx, ny = x / HERSHEY_EM, -(y - HERSHEY_BASELINE) / HERSHEY_EM
+            tx, ty = apply_matrix(matrix, nx, ny)
             if first:
                 d_parts.append(f"M {tx:.3f} {ty:.3f}")
                 first = False
@@ -67,6 +67,7 @@ def replace_text_with_hershey(svg_string):
     Leaves original element in place if no glyph is found.
     """
     root = ET.fromstring(svg_string)
+    root.attrib['style'] = 'background-color: white'
 
     replacements = []  # (parent, old_elem, new_elem or None)
 
