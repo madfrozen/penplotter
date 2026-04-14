@@ -19,6 +19,8 @@ You will also need to add `numpy` and `watchdog`
 ```bash
 pip3 install numpy --break-system-packages
 pip3 install watchdog --break-system-packages
+pip3 install hershey-fonts --break-system-packages
+pip3 install pymupdf --break-system-packages
 ```
 I know these all exist somewhere on the board but In3 haven't been able to find them yet, so for now we get an extra copy.
 ## Running the plotter without App Lab
