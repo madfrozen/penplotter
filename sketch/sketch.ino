@@ -23,6 +23,7 @@ const float stepper_max_accel = 100;
 const int steps_p_mm = 200 * motor_stepping / 2 / 20;
 const int max_y = 235; // in mm
 const int max_x = 265; // in mm
+bool absolute_mode = true;
 
 long timer_length = 3000; // in milliseconds
 bool is_timed_out = true;
@@ -35,8 +36,6 @@ float current_X = 0.0;
 float current_Y = 0.0;
 long target_A = 0;
 long target_B = 0;
-
-bool bridge_ready = false;
 
 void setup()
 {
@@ -58,10 +57,6 @@ void setup()
 
   multiStepper.addStepper(stepper_A);
   multiStepper.addStepper(stepper_B);
-
-  Monitor.begin(9600);
-  Monitor.setTimeout(50);
-  Monitor.println("Ready");
 
   Bridge.begin();
   Bridge.provide("parseGcode", parseGcode);
@@ -105,8 +100,10 @@ String parseGcode(String line)
   else if (line.startsWith("G21"))
     return "ok";
   else if (line.startsWith("G90"))
-    return "ok";
-  
+    return G90();
+  else if (line.startsWith("G91"))
+    return G91();
+  else return "Unkown GCODE";
   
 }
 
@@ -132,19 +129,31 @@ String Gmove(String line, bool speed_flag)
   pos[0] = (dx + dy) * steps_p_mm;
   pos[1] = (dx - dy) * steps_p_mm;
   multiStepper.moveTo(pos);
-  Monitor.println("Moving to X: " + String(dx) + "mm Y: " + String(dy) + "mm");
   multiStepper.runSpeedToPosition();
-  Monitor.println("Completed Move");
   return "ok";
 }
 
+//Pen Down Command
 String M03(){
   digitalWrite(PEN,LOW);
   return "ok";
 }
 
+//Pen Up Command
 String M05(){
   digitalWrite(PEN,HIGH);
+  return "ok";
+}
+
+//Absolute Movement Mode
+String G90(){
+  absolute_mode = true;
+  return "ok";
+}
+
+//Relative Movement Mode
+String G91(){
+  absolute_mode = false;
   return "ok";
 }
 
