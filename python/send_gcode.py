@@ -43,6 +43,7 @@ def send_gcode_file(filepath):
             if response != "ok":
                 print(f"Unexpected response for '{line}': {response}")
                 sys.exit(1)
+    Bridge.call("parseGcode", "M03")
 
 print("Plot Started")
 send_gcode_file(GCODE_FILE)
