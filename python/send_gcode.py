@@ -12,10 +12,10 @@ if not IN_DOCKER:
     # Checking for the lock file if it isnt in a docker
     print("Running from OS")
     LOCK_FILE = "/tmp/penplotter_initialized"
-    files = glob.glob("/home/arduino/ArduinoApps/penplotter/PlotJobs/*.gcode")
+    files = glob.glob("/home/arduino/ArduinoApps/penplotter/*.gcode")
 else:
     print("Running from App-Lab")
-    files = glob.glob("/app/PlotJobs/*.gcode")
+    files = glob.glob("/app/*.gcode")
 
 # Finding the most recently modifiyed file
 GCODE_FILE = max(files, key=os.path.getmtime)  
@@ -43,7 +43,6 @@ def send_gcode_file(filepath):
             if response != "ok":
                 print(f"Unexpected response for '{line}': {response}")
                 sys.exit(1)
-    Bridge.call("parseGcode", "M03")
 
 print("Plot Started")
 send_gcode_file(GCODE_FILE)

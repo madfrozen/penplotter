@@ -99,21 +99,21 @@ def replace_text_with_hershey(svg_string):
 
     return ET.tostring(root, encoding='unicode', xml_declaration=True)
 
-def process(pdf_path, output_path):
+def process(pdf_path):
     print(f"Loading {pdf_path}...")
     svg = pdf_to_svg(pdf_path)
 
     print("Substituting Hershey glyphs...")
     svg_out = replace_text_with_hershey(svg)
 
-    with open(output_path, 'w', encoding='utf-8') as f:
+    with open("current.svg", 'w', encoding='utf-8') as f:
         f.write(svg_out)
 
-    print(f"Written to {output_path}")
+    print(f"Written to current.svg")
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        print("Usage: python3 slice_pdf.py input.pdf output.svg")
+    if len(sys.argv) < 2:
+        print("Usage: python3 slice_pdf.py input.pdf")
         sys.exit(1)
 
-    process(sys.argv[1], sys.argv[2])
+    process(sys.argv[1])
