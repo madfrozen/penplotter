@@ -26,4 +26,4 @@ run(f"PYTHONPATH=/home/arduino/ArduinoApps/penplotter/svg-slicer python3 -m svg_
     --output {gcode}")
 elapsed = time.time() - start
 print(f"[INFO] SVG to GCode took {elapsed:.2f}s")
-run(f"python3 send_gcode.py")
+run(f"python3 python/send_gcode.py")
