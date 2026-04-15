@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import os
+import time
 
 def run(cmd):
     result = subprocess.run(cmd, shell=True)
@@ -17,9 +18,12 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 svg = os.path.join(BASE, "current.svg")
 gcode = os.path.join(BASE, "current.gcode")
 
-run(f"python3 slice_pdf.py {pdf}")
-run(f"python3 -m svg_slicer.cli {svg} \
-  --config config.yaml \
-  --printer-profile madsen_pen_plotter \
-  --output {gcode}")
+run(f"python3 python/slice_pdf.py {pdf}")
+start = time.time()
+run(f"PYTHONPATH=/home/arduino/ArduinoApps/penplotter/svg-slicer python3 -m svg_slicer.cli {svg} \
+    --config svg-slicer/config.yaml \
+    --printer-profile madsen_pen_plotter \
+    --output {gcode}")
+elapsed = time.time() - start
+print(f"[INFO] SVG to GCode took {elapsed:.2f}s")
 run(f"python3 send_gcode.py")
