@@ -17,6 +17,7 @@ def pdf_to_svg(pdf_path, page_index=0):
     if doc.page_count == 0:
         raise ValueError("PDF has no pages.")
     page = doc[page_index]
+    page.set_rotation(180)
     svg_string = page.get_svg_image(matrix=fitz.Identity)
     doc.close()
     return svg_string
