@@ -2,5 +2,6 @@
 .cache/
 PenPlotterDrawingv12.pdf
 svg-slicer/
-current.gcode
+*.gcode
 current.svg
+current.gcode
