@@ -22,6 +22,7 @@ run(f"python3 python/slice_pdf.py {pdf}")
 start = time.time()
 run(f"PYTHONPATH=/home/arduino/ArduinoApps/penplotter/svg-slicer python3 -m svg_slicer.cli {svg} \
     --config svg-slicer/config.yaml \
+    --scale none \
     --printer-profile madsen_pen_plotter \
     --output {gcode}")
 elapsed = time.time() - start
