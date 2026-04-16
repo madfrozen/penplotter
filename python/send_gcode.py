@@ -45,5 +45,11 @@ def send_gcode_file(filepath):
                 sys.exit(1)
 
 print("Plot Started")
-send_gcode_file(GCODE_FILE)
-print("Plot Completed")
+try:
+    send_gcode_file(GCODE_FILE)
+    print("Plot Completed")
+except KeyboardInterrupt:
+    print("\nCancelled - returning to home")
+    Bridge.call("parseGcode", "M05")
+    Bridge.call("parseGcode", "G0 X0 Y0")
+    Bridge.call("parseGcode", "M03")
