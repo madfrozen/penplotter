@@ -11,6 +11,7 @@
 #define ENABLE_B 9
 
 #define PEN 10
+const int PEN_DELAY = 2; // delay in Pen movement in milliseconds
 
 AccelStepper stepper_A(AccelStepper::DRIVER, STEP_A, DIR_A);
 AccelStepper stepper_B(AccelStepper::DRIVER, STEP_B, DIR_B);
@@ -137,12 +138,14 @@ String Gmove(String line, bool speed_flag)
 //Pen Down Command
 String M03(){
   digitalWrite(PEN,LOW);
+  delay(PEN_DELAY);
   return "ok";
 }
 
 //Pen Up Command
 String M05(){
   digitalWrite(PEN,HIGH);
+  delay(PEN_DELAY);
   return "ok";
 }
 

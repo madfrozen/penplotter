@@ -4,3 +4,4 @@ PenPlotterDrawingv12.pdf
 svg-slicer/
 current.svg
 current.gcode
+*.gcode
