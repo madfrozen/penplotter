@@ -11,7 +11,7 @@
 #define ENABLE_B 9
 
 #define PEN 10
-const int PEN_DELAY = 2; // delay in Pen movement in milliseconds
+const int PEN_DELAY = 10; // delay in Pen movement in milliseconds
 
 AccelStepper stepper_A(AccelStepper::DRIVER, STEP_A, DIR_A);
 AccelStepper stepper_B(AccelStepper::DRIVER, STEP_B, DIR_B);

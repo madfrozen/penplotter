@@ -5,3 +5,4 @@ svg-slicer/
 current.svg
 current.gcode
 *.gcode
+*.pdf
