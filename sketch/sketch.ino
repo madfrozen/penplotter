@@ -20,6 +20,8 @@ MultiStepper multiStepper;
 const int motor_stepping = 4;
 int stepper_move_speed = 200; // in mm/s
 int stepper_draw_speed = 50;  // in mm/s
+const float STEPPER_MAX_V = 200.0; // in mm/s
+const float STEPPER_MIN_V = 1.0; // in mm/s
 const float stepper_max_accel = 100;
 const int steps_p_mm = 200 * motor_stepping / 2 / 20;
 const int max_y = 235; // in mm
@@ -45,8 +47,8 @@ void setup()
   digitalWrite(ENABLE_A, HIGH);
   digitalWrite(ENABLE_B, HIGH);
 
-  pinMode(PEN,OUTPUT);
-  digitalWrite(PEN,LOW);
+  pinMode(PEN, OUTPUT);
+  digitalWrite(PEN, LOW);
 
   stepper_A.setMinPulseWidth(2);
   stepper_A.setMaxSpeed(stepper_move_speed * steps_p_mm);
@@ -75,7 +77,7 @@ void loop()
     current_timer = timer_length;
     digitalWrite(ENABLE_A, HIGH);
     digitalWrite(ENABLE_B, HIGH);
-    digitalWrite(PEN,LOW);
+    digitalWrite(PEN, LOW);
   }
   else
   {
@@ -94,9 +96,9 @@ String parseGcode(String line)
     return Gmove(line, true);
   else if (line.startsWith("G00") || line.startsWith("G0"))
     return Gmove(line, false);
-  else if (line.startsWith("M03")||line.startsWith("M3"))
+  else if (line.startsWith("M03") || line.startsWith("M3"))
     return M03();
-  else if (line.startsWith("M05")||line.startsWith("M5"))
+  else if (line.startsWith("M05") || line.startsWith("M5"))
     return M05();
   else if (line.startsWith("G21"))
     return "ok";
@@ -104,8 +106,8 @@ String parseGcode(String line)
     return G90();
   else if (line.startsWith("G91"))
     return G91();
-  else return "Unknown GCODE";
-  
+  else
+    return "Unknown GCODE";
 }
 
 /*  Standard G move func
@@ -115,13 +117,22 @@ String parseGcode(String line)
 */
 String Gmove(String line, bool speed_flag)
 {
+  float dx = 0;
+  float dy = 0;
   if (speed_flag)
-    setStepperSpeed(stepper_draw_speed);
+  {
+    dx = wrap(parseParam(line, 'X', current_X), 0, max_x);
+    dy = wrap(parseParam(line, 'Y', current_Y), 0, max_y);
+    float v = wrap(parseParam(line, 'F', stepper_draw_speed),STEPPER_MIN_V,STEPPER_MAX_V);
+    setStepperSpeed(v);
+  }
   else
-    setStepperSpeed(stepper_move_speed);
-
-  float dx = wrap(parseParam(line, 'X', current_X), 0, max_x);
-  float dy = wrap(parseParam(line, 'Y', current_Y), 0, max_y);
+  {
+    dx = wrap(parseParam(line, 'X', current_X), 0, max_x);
+    dy = wrap(parseParam(line, 'Y', current_Y), 0, max_y);
+    float v = wrap(parseParam(line, 'F', stepper_move_speed),STEPPER_MIN_V,STEPPER_MAX_V);\
+    setStepperSpeed(v);
+  }
 
   current_X = dx;
   current_Y = dy;
@@ -135,28 +146,32 @@ String Gmove(String line, bool speed_flag)
   return "ok";
 }
 
-//Pen Down Command
-String M03(){
-  digitalWrite(PEN,LOW);
+// Pen Down Command
+String M03()
+{
+  digitalWrite(PEN, LOW);
   delay(PEN_DELAY);
   return "ok";
 }
 
-//Pen Up Command
-String M05(){
-  digitalWrite(PEN,HIGH);
+// Pen Up Command
+String M05()
+{
+  digitalWrite(PEN, HIGH);
   delay(PEN_DELAY);
   return "ok";
 }
 
-//Absolute Movement Mode
-String G90(){
+// Absolute Movement Mode
+String G90()
+{
   absolute_mode = true;
   return "ok";
 }
 
-//Relative Movement Mode
-String G91(){
+// Relative Movement Mode
+String G91()
+{
   absolute_mode = false;
   return "ok";
 }
