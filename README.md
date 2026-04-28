@@ -24,9 +24,9 @@ Add it to your path
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
-You will also need to add `numpy`, `watchdog`, and a few others.
+You will also need to add `numpy`, and `watchdog`.
 ```bash
-pip3 install numpy watchdog hershey-fonts pymupdf --break-system-packages
+pip3 install numpy watchdog --break-system-packages
 ```
 I know these the first two exist somewhere on the board but I haven't been able to find them yet, so for now we get an extra copy.
 
@@ -38,7 +38,7 @@ git clone https://github.com/acmattson3/svg-slicer
 ```
 Then install the dependencies
 ```bash
-sudo apt-get install python3-svgelements python3-shapely python3-yaml python3-matplotlib
+sudo apt-get install python3-svgelements shapely PyYAML matplotlib Pillow PyMuPDF Hershey-Fonts
 ```
 We drop the needed dependencies for the GUI as it will just be running headless. Feel free to also delete the `examples` folder.
 ## First time start up
@@ -54,7 +54,7 @@ Then you can run the upload script to compile then flash to the board
 bash upload.sh
 ```
 ## Using the printer
-There are to ways to use the printer. The first way is by manuly putting a pdf on it by using `scp`
+There are two ways to use the printer. The first way is by manuly putting a pdf on it by using `scp`
 ```bash
 #example: run this on your computer, not the Arduino
 scp path_to_file/file.pdf arduino@[boardname].local:~/ArduinoApps/penplotter
