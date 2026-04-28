@@ -18,13 +18,13 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 svg = os.path.join(BASE, "current.svg")
 gcode = os.path.join(BASE, "current.gcode")
 
-run(f"python3 python/slice_pdf.py {pdf}")
+print("[INFO] Starting PDF to GCode slicing")
 start = time.time()
-run(f"PYTHONPATH=/home/arduino/ArduinoApps/penplotter/svg-slicer python3 -m svg_slicer.cli {svg} \
+run(f"PYTHONPATH=/home/arduino/ArduinoApps/penplotter/svg-slicer python3 -m svg_slicer.cli {pdf} \
     --config svg-slicer/config.yaml \
     --scale auto \
     --printer-profile madsen_pen_plotter \
     --output {gcode}")
 elapsed = time.time() - start
-print(f"[INFO] SVG to GCode took {elapsed:.2f}s")
-run(f"python3 python/send_gcode.py")
+print(f"[INFO] PDF to GCode took {elapsed:.2f}s")
+run(f"python3 python/send_gcode.py current.gcode")
