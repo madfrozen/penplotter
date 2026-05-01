@@ -144,15 +144,14 @@ String Gmove(String line, bool speed_flag)
     dy = wrap(dy,0,max_y);
     current_X = dx;
     current_Y = dy;
-    pos[0] = (current_X + current_Y) * steps_p_mm;
-    pos[1] = (current_X - current_Y) * steps_p_mm;
   }
   else {
     current_X += dx;
     current_Y += dy;
-    pos[0] = (current_X + current_Y) * steps_p_mm;
-    pos[1] = (current_X - current_Y) * steps_p_mm;
   }
+  pos[0] = (current_X + current_Y) * steps_p_mm;
+  pos[1] = (current_X - current_Y) * steps_p_mm;
+  return String(pos[0]) + " " + String(pos[1]);
   multiStepper.moveTo(pos);
   multiStepper.runSpeedToPosition();
   current_timer = 0;
@@ -194,6 +193,8 @@ String G28()
 {
   stepper_A.setCurrentPosition(0);
   stepper_B.setCurrentPosition(0);
+  current_X = 0.0;
+  current_Y = 0.0;
   return "ok";
 }
 
