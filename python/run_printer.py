@@ -24,6 +24,8 @@ run(f"PYTHONPATH=/home/arduino/ArduinoApps/penplotter/svg-slicer python3 -m svg_
     --config svg-slicer/config.yaml \
     --scale auto \
     --printer-profile madsen_pen_plotter \
+    --rotate 180 \
+    --write-in-order \
     --output {gcode}")
 elapsed = time.time() - start
 print(f"[INFO] PDF to GCode took {elapsed:.2f}s")

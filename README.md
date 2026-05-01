@@ -24,7 +24,7 @@ Add it to your path
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
-You will also need to add `numpy`, and `watchdog`.
+You will also need to add `numpy` and `watchdog`.
 ```bash
 pip3 install numpy watchdog --break-system-packages
 ```
