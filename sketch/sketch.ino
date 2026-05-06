@@ -204,7 +204,7 @@ float parseParam(String line, char Param, float currentVal)
   int indx = line.indexOf(Param);
   if (indx == -1)
     // if new value not found, does not modify the old one
-    return absolute_mode ? currentVal : 0;
+    return (absolute_mode || Param == 'F') ? currentVal : 0;
   return line.substring(indx + 1).toFloat();
 }
 
