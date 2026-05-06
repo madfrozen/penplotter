@@ -151,7 +151,7 @@ String Gmove(String line, bool speed_flag)
   }
   pos[0] = (current_X + current_Y) * steps_p_mm;
   pos[1] = (current_X - current_Y) * steps_p_mm;
-  return String(pos[0]) + " " + String(pos[1]);
+  // return String(pos[0]) + " " + String(pos[1]);
   multiStepper.moveTo(pos);
   multiStepper.runSpeedToPosition();
   current_timer = 0;
