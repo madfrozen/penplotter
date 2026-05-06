@@ -37,8 +37,6 @@ long delta = 0;
 
 float current_X = 0.0;
 float current_Y = 0.0;
-long target_A = 0;
-long target_B = 0;
 
 void setup()
 {
@@ -93,19 +91,29 @@ String parseGcode(String line)
   digitalWrite(ENABLE_A, LOW);
   digitalWrite(ENABLE_B, LOW);
   if (line.startsWith("G1") || line.startsWith("G01"))
+    // Draw Move
     return Gmove(line, true);
   else if (line.startsWith("G00") || line.startsWith("G0"))
+    // Rapid Move
     return Gmove(line, false);
   else if (line.startsWith("M03") || line.startsWith("M3"))
+    // Pen Down
     return M03();
   else if (line.startsWith("M05") || line.startsWith("M5"))
+    // Pen Up
     return M05();
   else if (line.startsWith("G21"))
+    // Use Millimeters (Not Implemented)
     return "ok";
   else if (line.startsWith("G90"))
+    // Use Absolute
     return G90();
   else if (line.startsWith("G91"))
+    // Use Relative
     return G91();
+  else if (line.startsWith("G28"))
+    // Use Relative
+    return G28();
   else
     return "Unknown GCODE";
 }
@@ -117,29 +125,33 @@ String parseGcode(String line)
 */
 String Gmove(String line, bool speed_flag)
 {
-  float dx = 0;
-  float dy = 0;
+  float dx = parseParam(line, 'X', current_X);
+  float dy = parseParam(line, 'Y', current_Y);
   if (speed_flag)
   {
-    dx = wrap(parseParam(line, 'X', current_X), 0, max_x);
-    dy = wrap(parseParam(line, 'Y', current_Y), 0, max_y);
     float v = wrap(parseParam(line, 'F', stepper_draw_speed),STEPPER_MIN_V,STEPPER_MAX_V);
     setStepperSpeed(v);
   }
   else
   {
-    dx = wrap(parseParam(line, 'X', current_X), 0, max_x);
-    dy = wrap(parseParam(line, 'Y', current_Y), 0, max_y);
-    float v = wrap(parseParam(line, 'F', stepper_move_speed),STEPPER_MIN_V,STEPPER_MAX_V);\
+    float v = wrap(parseParam(line, 'F', stepper_move_speed),STEPPER_MIN_V,STEPPER_MAX_V);
     setStepperSpeed(v);
   }
 
-  current_X = dx;
-  current_Y = dy;
-
   long pos[2];
-  pos[0] = (dx + dy) * steps_p_mm;
-  pos[1] = (dx - dy) * steps_p_mm;
+  if (absolute_mode) {
+    dx = wrap(dx,0,max_x);
+    dy = wrap(dy,0,max_y);
+    current_X = dx;
+    current_Y = dy;
+  }
+  else {
+    current_X += dx;
+    current_Y += dy;
+  }
+  pos[0] = (current_X + current_Y) * steps_p_mm;
+  pos[1] = (current_X - current_Y) * steps_p_mm;
+  // return String(pos[0]) + " " + String(pos[1]);
   multiStepper.moveTo(pos);
   multiStepper.runSpeedToPosition();
   current_timer = 0;
@@ -177,8 +189,13 @@ String G91()
 }
 
 // Home Command
-void G28()
+String G28()
 {
+  stepper_A.setCurrentPosition(0);
+  stepper_B.setCurrentPosition(0);
+  current_X = 0.0;
+  current_Y = 0.0;
+  return "ok";
 }
 
 // Picks value out of gcode for given parameter
@@ -187,7 +204,7 @@ float parseParam(String line, char Param, float currentVal)
   int indx = line.indexOf(Param);
   if (indx == -1)
     // if new value not found, does not modify the old one
-    return currentVal;
+    return (absolute_mode || Param == 'F') ? currentVal : 0;
   return line.substring(indx + 1).toFloat();
 }
 
