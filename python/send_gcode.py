@@ -31,8 +31,6 @@ def send_gcode_file(filepath):
         for line in f:
             # Strip whitespace
             line = line.strip()
-            if VERBOSE:
-                print(line)
             # Skip blank lines and comments
             if not line or line.startswith(";"):
                 continue
@@ -45,6 +43,8 @@ def send_gcode_file(filepath):
                 continue
  
             # Send line and wait for acknowledgment
+            if VERBOSE:
+                print(line)
             response = Bridge.call("parseGcode", line)
             if response != "ok":
                 print(f"Unexpected response for '{line}': {response}")
