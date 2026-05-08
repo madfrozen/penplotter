@@ -1,6 +1,9 @@
 # 🖊️ PenPlotter
 ### Todo
 - Add CLI for moving with gcode from terminal
+- Add background section
+
+## Background
 
 ## Getting The Code
 Connect you you Arduino Uno Q and open a terminal in it.  
