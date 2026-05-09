@@ -6,6 +6,7 @@ echo "Cloning Arduino App Bricks repo and installing"
 git clone https://github.com/arduino/app-bricks-py.git ~/arduino-app-utils
 sudo pip3 install ~/arduino-app-utils --break-system-packages
 
+echo "Adding Libraries to path and adding alias to bashrc"
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 echo "alias plot='python3 ~/ArduinoApps/penplotter/python/run_printer.py'" >> ~/.bashrc
 

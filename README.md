@@ -15,7 +15,11 @@
 
 ## Background
 
-Add history stuff here
+When CAD (Computer Aided Design) started to get more and more popular in the 1960's and 70's there became a need to be able to get high quality engineering accurate drawing out of the computers. While Inkjet printers were available at the time, the computer memory needed to turn a large vector based model into a rasterized image for printing on an inkjet printer was not available on most workstations of the time. Another disadvantage was the DPI (Dots Per Inch) or early Inkjets was only 75 to 100 while a pen plotter could get an equivalent of 1000 dpi. Pen plotters could also print in color, by either manually swapping the pens or, on later models, automatic color swapping. Color inkjet at the time was outrageously expensive.
+
+While pen plotters are no longer used to plot designs because of the now comparable cost and much greater speed of inkjet and laser printers, they are an important part of engineering heritage. The point of this project was to build my own so that I could plot my own designs and projects that I am proud of in order to have permanent keepsakes from them.
+
+Add pics and build description here
 
 ### Parts List
 
