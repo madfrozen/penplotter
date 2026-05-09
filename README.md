@@ -1,5 +1,9 @@
 # 🖊️ PenPlotter
 
+## TODO
+
+- add args to run_printer.py
+
 ### Contents
 
 - [Background](#background)
