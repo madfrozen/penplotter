@@ -24,8 +24,8 @@ const float STEPPER_MAX_V = 200.0; // in mm/s
 const float STEPPER_MIN_V = 1.0; // in mm/s
 const float stepper_max_accel = 100;
 const int steps_p_mm = 200 * motor_stepping / 2 / 20;
-const int max_y = 235; // in mm
-const int max_x = 265; // in mm
+const int max_y = 234.6; // in mm
+const int max_x = 267.6; // in mm
 bool absolute_mode = true;
 
 long timer_length = 10000; // in milliseconds

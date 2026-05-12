@@ -8,6 +8,7 @@
 
 - [Background](#background)
 - [The Build](#the-build)
+  - [Build Notes](#notes-on-replicating-the-build)
   - [Parts List](#parts-list)
 - [Getting the code](#getting-the-code)
   - [Automatic Install](#automatic-install)
@@ -22,11 +23,85 @@ While pen plotters are no longer used to plot designs because of the now compara
 
 ## The Build
 
-Add pics and build description here
+The main frame of the build was salvaged off an Anycubic Mega Zero 2.0 that I was done dealing with. Half way through taking it apart I came across the perfect frame to build my new pen plotter from. The stepper motors are also salvaged from that printer. Building the movement method as a CoreXY system seemed the most logical option as this would make the moving parts very lightweight and small as both of the needed steppers could be stationary on the rear of the frame. The CoreXY system also allowed for the easy inclusion of a belt tensioning system in the front belt pullies.
+
+<div style="display:flex; gap:10px; justify-content:center">
+  <figure style="text-align:center; width:50%">
+    <img src="Assets/frame_no_belts.jpeg" style="width:100%; height:600px; object-fit:contain">
+    <figcaption><em>Initial mockup with linear rails cut to size</em></figcaption>
+  </figure>
+  <figure style="text-align:center; width:50%">
+    <img src="Assets/frame_two_belt.jpeg" style="width:100%; height:600px; object-fit:contain">
+    <figcaption><em>Both belts added with stepper motors in place</em></figcaption>
+  </figure>
+</div>
+
+Another requirement that I set for myself was that i had to make a nice clacking noise while it was working. This was accomplished by using a magnetic solenoid to pull the pen up and down. One issue that can arise with these types of solenoids is that they easily get warm while they are working. To prevent this from being an issue the mount was machined out of brass and aluminum and the system was designed so that the solenoid was only on for the quick and short travel moves.
+
+<figure style="text-align:center">
+  <img src="Assets/soliniod_head.jpeg" style="max-width:600px; width:100%">
+  <figcaption><em>Machined magnetic solenoid mount</em></figcaption>
+</figure>
+
+The final issue that I had to address was the plotter sliding around. It was jerking a bit and this was causing the plot to get of because the paper was just attached to the table that it was sitting on that was not moving. A friend suggested that I make a vacuum table to fix this issue. The plate of the vacuum table is a thick piece of acrylic with 144 holes, each .089", drilled in to it in a regular pattern. The vacuum is provided by 4, 12 volt fans on the bottom of the chamber that extract air. I had been planning to make the fans also be controlled by via gcode but this seemed unneeded and I instead chose to make a simple switch on them that you manually turn on to print. 
+
+<div style="display:flex; gap:10px; justify-content:center">
+  <figure style="text-align:center; width:50%">
+    <img src="Assets/vacuum_table_top.jpeg" style="width:100%; height:600px; object-fit:contain">
+    <figcaption><em>Vacuum Table top (pre-adding holes)</em></figcaption>
+  </figure>
+  <figure style="text-align:center; width:50%">
+    <img src="Assets/vacuum_table_bottom.jpeg" style="width:100%; height:600px; object-fit:contain">
+    <figcaption><em>Vacuum table bottom</em></figcaption>
+  </figure>
+</div>
+
+### Notes on Replicating the build
+
+In the assets folder you will find a Fusion file for the CAD models of this build as well as PDF drawings of important pieces and `.STEP` files. While I was building this I had access to a Prusa XL in order to print the parts for this. As such some of the vacuum chamber parts are a bit large to fit on the most common 3D printers. I also had access to an amazing machine shop that allowed me to make all the metal parts myself. The metal parts are designed to be machined without to much trouble so hopefully Send Cut Send wont charge too much. I will also include a rough parts list for the items I bought for the project and some major items I scavenged from the Mega Zero, but it will by no means be exhaustive.
+
+***If you have any issues attempting to replicate this build please raise an issue on the [GitHub](https://github.com/madfrozen/penplotter/issues) and I will attempt to help however I can***
+
+Important Notes:
+ - When cutting down the 400mm Linear Rail, refer to the CAD model as the hole locations are important.
+ - I got clone drv8825 stepper drivers from amazon, while I didn't have an issue there were some negative reviews. [Pololu](https://www.pololu.com/product/2133) sells the actual ones on their site and also has a great write up with how to use them (they are 5x the price though).
+ - The power supply I used for the project is now out of stock the next one up is a different foot print then the one I used which might lead to some issues with the mounting plate for it and the 3D printed covers for it and the power switch.
+ - The linear bearings listed are not of great quality. They worked better after adding more oil and running them up and down a 5mm rod, occasionally blowing them out with compressed air to remove any grit left from manufacturing.
+ - All the bolts for the pullies are just m5 of different Lengths. All the m5 used in the project are Machine Thread
+ - All other metric bolts are m3, the any that attach to the metal parts are machine thread (most are 8mm) and the ones that go into plastic are the self tapping kind.
+ - The frame that I used was bolted together through the frame. To assemble the frame that you get you will have to purchase some sort of bracket to attach them together.
+ - Most of the 3D printed parts can be printed without supports.
+ - The gaskets for the vacuum system were printed out of foaming TPU but a low-infill regular TPU print should also work
+
 
 ### Parts List
 
-add a table of parts
+<div style="display:flex; justify-content:center">
+
+| Part | Quantity | Notes | Link |
+|------|----------|-------|------|
+| 2040 V-slot Al Extrusion | 2 | 240mm | NA |
+| 4040 V-slot Al Extrusion | 1 | 360mm | NA |
+| MGN12H Linear Rail | 1 | 280mm | [Amazon](https://amzn.to/435fnNw)
+| MGN12H Linear Rail | 1 | 313mm | [Amazon](https://amzn.to/434sWgc)
+| GT2 Toothless Pullies | 2 | CoreXY takes a lot of pullies | [Amazon](https://amzn.to/48SJriT)
+| GT2 20 toothed pully (5mm bore) | 2 | Drive pullies | [Amazon](https://amzn.to/4wvaf2U)
+| DRV8825 Stepper Drivers | 1 | Clone of [these](https://www.pololu.com/product/2133). | [Amazon](https://amzn.to/4eE2fWM)
+| 12V 10A Power supply | 1 | The 12V 8A one I got is now out of stock | [Amazon](https://amzn.to/49HgKFO)
+| MOSFET power switch | 1 | Used to switch the power into the magnetic solenoid | [Amazon](https://amzn.to/4u3qG4H)
+| Magnetic Solenoid | 1 | it moves | [Amazon](https://amzn.to/4f1vbbB)
+| 5mm Bore Linear Bearings | 1 | not great quality | [Amazon](https://amzn.to/42uyroo)
+| 5mm Rod | 2 | 32mm | NA
+| 5-40 Set Screws | 7 | Various lengths needed (see CAD) | NA
+| 8-32 x $\frac{5}{16}$" flush mount bolts | 2 | This is a McMASTER-CARR listing, you might find them cheaper elsewhere | [McMASTER](https://www.mcmaster.com/91253A190/)
+| 50mm Blower fans | 1 | they move air | [Amazon](https://amzn.to/4d7X3cF)
+| Proto Boards for and Arduino Uno | 1 | work for the Uno Q too | [Amazon](https://amzn.to/4uaMVWC)
+| T-slot nuts | 1 | nothing special | [Amazon](https://amzn.to/3PlJcGv)
+| m4 x 25mm Machine bolts | 8 | To bolt the fans on | NA
+| Power Switch | 1 | I got mine off my printer, but this looks identical | [Amazon](https://amzn.to/3R4mCmo)
+|
+
+</div>
 
 ## Getting The Code
 
