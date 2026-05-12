@@ -25,36 +25,28 @@ While pen plotters are no longer used to plot designs because of the now compara
 
 The main frame of the build was salvaged off an Anycubic Mega Zero 2.0 that I was done dealing with. Half way through taking it apart I came across the perfect frame to build my new pen plotter from. The stepper motors are also salvaged from that printer. Building the movement method as a CoreXY system seemed the most logical option as this would make the moving parts very lightweight and small as both of the needed steppers could be stationary on the rear of the frame. The CoreXY system also allowed for the easy inclusion of a belt tensioning system in the front belt pullies.
 
-<div style="display:flex; gap:10px; justify-content:center">
-  <figure style="text-align:center; width:50%">
-    <img src="Assets/frame_no_belts.jpeg" style="width:100%; height:600px; object-fit:contain">
-    <figcaption><em>Initial mockup with linear rails cut to size</em></figcaption>
-  </figure>
-  <figure style="text-align:center; width:50%">
-    <img src="Assets/frame_two_belt.jpeg" style="width:100%; height:600px; object-fit:contain">
-    <figcaption><em>Both belts added with stepper motors in place</em></figcaption>
-  </figure>
-</div>
+<p align="center">
+  <img src="Assets/frame_no_belts.jpeg" width="45%">
+  <img src="Assets/frame_two_belt.jpeg" width="45%">
+  <br>
+  <em>Left: Initial mockup with linear rails cut to size &nbsp;&nbsp; Right: Both belts added with stepper motors in place</em>
+</p>
 
 Another requirement that I set for myself was that i had to make a nice clacking noise while it was working. This was accomplished by using a magnetic solenoid to pull the pen up and down. One issue that can arise with these types of solenoids is that they easily get warm while they are working. To prevent this from being an issue the mount was machined out of brass and aluminum and the system was designed so that the solenoid was only on for the quick and short travel moves.
 
-<figure style="text-align:center">
-  <img src="Assets/soliniod_head.jpeg" style="max-width:600px; width:100%">
-  <figcaption><em>Machined magnetic solenoid mount</em></figcaption>
-</figure>
+<p align="center">
+  <img src="Assets/soliniod_head.jpeg" width="400"><br>
+  <em>Machined magnetic solenoid mount</em>
+</p>
 
 The final issue that I had to address was the plotter sliding around. It was jerking a bit and this was causing the plot to get of because the paper was just attached to the table that it was sitting on that was not moving. A friend suggested that I make a vacuum table to fix this issue. The plate of the vacuum table is a thick piece of acrylic with 144 holes, each .089", drilled in to it in a regular pattern. The vacuum is provided by 4, 12 volt fans on the bottom of the chamber that extract air. I had been planning to make the fans also be controlled by via gcode but this seemed unneeded and I instead chose to make a simple switch on them that you manually turn on to print. 
 
-<div style="display:flex; gap:10px; justify-content:center">
-  <figure style="text-align:center; width:50%">
-    <img src="Assets/vacuum_table_top.jpeg" style="width:100%; height:600px; object-fit:contain">
-    <figcaption><em>Vacuum Table top (pre-adding holes)</em></figcaption>
-  </figure>
-  <figure style="text-align:center; width:50%">
-    <img src="Assets/vacuum_table_bottom.jpeg" style="width:100%; height:600px; object-fit:contain">
-    <figcaption><em>Vacuum table bottom</em></figcaption>
-  </figure>
-</div>
+<p align="center">
+  <img src="Assets/vacuum_table_top.jpeg" width="45%">
+  <img src="Assets/vacuum_table_bottom.jpeg" width="45%">
+  <br>
+  <em>Left: Vacuum Table top (pre-adding holes) &nbsp;&nbsp; Right: Vacuum table bottom</em>
+</p>
 
 ### Notes on Replicating the build
 
