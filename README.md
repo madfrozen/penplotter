@@ -91,7 +91,6 @@ Important Notes:
 | T-slot nuts | 1 | nothing special | [Amazon](https://amzn.to/3PlJcGv)
 | m4 x 25mm Machine bolts | 8 | To bolt the fans on | NA
 | Power Switch | 1 | I got mine off my printer, but this looks identical | [Amazon](https://amzn.to/3R4mCmo)
-|
 
 </div>
 
