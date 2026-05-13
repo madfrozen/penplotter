@@ -8,7 +8,7 @@ import argparse
 parser = argparse.ArgumentParser(prog = "plot")
 verbose_arg = "v"
 write_in_order_arg = "w"
-parser.add_argument("file", help="File to plot")
+parser.add_argument("file", help="File to plot (PDF or SVG)")
 parser.add_argument(f"-{verbose_arg}","--verbose", action="store_true", help="Print all streamed lines of GCode")
 parser.add_argument(f"-{write_in_order_arg}","--write-in-order", action = "store_true",help="Writes all lines first then does text (slower)")
 args = parser.parse_args()

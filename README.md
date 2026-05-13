@@ -1,9 +1,11 @@
-# 🖊️ Pen Plotter
+# Madsen Pen Plotter
 
 
 <p align="center">
-  <img src="Assets/final_product.jpeg" width="600"><br>
-  <em>The finished machine</em>
+  <img src="Assets/the_art.jpeg" width="45%">
+  <img src="Assets/the_artist.jpeg" width="45%">
+  <br>
+  <em>The Art and The Artist</em>
 </p>
 
 ### Contents
@@ -205,7 +207,7 @@ bash upload.sh
 
 Before you start a plot make sure the pen is in the correct position. All the way to the rear and the right is where it thinks it is every time it starts a plot. The small cutout on the front, center of the drawing board is 1mm lower then the drawing surface. When putting a pen in the holder, bottom it out here so that it has an extra 1mm of travel to account for any board unevenness.
 
-You will need to put the pdf file that you want to plot on to the board.
+You will need to put the pdf file that you want to plot on to the board. **While the Acmattson Slicer does support rasterizing images, I recommend against it. Make sure that any PDF's you attempt to plot are proper PDF's and not document scans or pictures.** The slicer is also capable of dealing with SVG files that you want to plot.
 
 ```bash
 #example: run this on your computer, not the Arduino. In either Powershell or Bash
