@@ -1,8 +1,10 @@
-# 🖊️ PenPlotter
+# 🖊️ Pen Plotter
 
-## TODO
 
-- Add CAD files to Assets Folder
+<p align="center">
+  <img src="Assets/final_product.jpeg" width="600"><br>
+  <em>The finished machine</em>
+</p>
 
 ### Contents
 
@@ -25,6 +27,8 @@ While pen plotters are no longer used to plot designs because of the now compara
 
 The main frame of the build was salvaged off an Anycubic Mega Zero 2.0 that I was done dealing with. Half way through taking it apart I came across the perfect frame to build my new pen plotter from. The stepper motors are also salvaged from that printer. Building the movement method as a CoreXY system seemed the most logical option as this would make the moving parts very lightweight and small as both of the needed steppers could be stationary on the rear of the frame. The CoreXY system also allowed for the easy inclusion of a belt tensioning system in the front belt pullies.
 
+For the main brain of the build I chose a Arduino UNO Q. The ability to have both a Linux OS and a STM32 Microcontroller on the same board was very attractive. The Arduino hardware simplified my power requirements as i could feed it the same 12 volts that I was giving my stepper drivers without needing a stepdown like a raspberry pi would. Another advantage is that the prototyping shields that work for the normal UNO will also work on the UNO Q
+
 <p align="center">
   <img src="Assets/frame_no_belts.jpeg" width="45%">
   <img src="Assets/frame_two_belt.jpeg" width="45%">
@@ -35,8 +39,10 @@ The main frame of the build was salvaged off an Anycubic Mega Zero 2.0 that I wa
 Another requirement that I set for myself was that i had to make a nice clacking noise while it was working. This was accomplished by using a magnetic solenoid to pull the pen up and down. One issue that can arise with these types of solenoids is that they easily get warm while they are working. To prevent this from being an issue the mount was machined out of brass and aluminum and the system was designed so that the solenoid was only on for the quick and short travel moves.
 
 <p align="center">
-  <img src="Assets/soliniod_head.jpeg" width="400"><br>
-  <em>Machined magnetic solenoid mount</em>
+  <img src="Assets/soliniod_head.jpeg" width="45%">
+  <img src="Assets/rear_wiring.jpeg" width="45%">
+  <br>
+  <em>Left: Machined solenoid head &nbsp;&nbsp; Right: Rear power wiring for plotter</em>
 </p>
 
 The final issue that I had to address was the plotter sliding around. It was jerking a bit and this was causing the plot to get of because the paper was just attached to the table that it was sitting on that was not moving. A friend suggested that I make a vacuum table to fix this issue. The plate of the vacuum table is a thick piece of acrylic with 144 holes, each .089", drilled in to it in a regular pattern. The vacuum is provided by 4, 12 volt fans on the bottom of the chamber that extract air. I had been planning to make the fans also be controlled by via gcode but this seemed unneeded and I instead chose to make a simple switch on them that you manually turn on to print. 
@@ -48,6 +54,20 @@ The final issue that I had to address was the plotter sliding around. It was jer
   <em>Left: Vacuum Table top (pre-adding holes) &nbsp;&nbsp; Right: Vacuum table bottom</em>
 </p>
 
+<p align="center">
+  <img src="Assets/arduino.jpeg" width="45%">
+  <img src="Assets/vacuum_power.jpeg" width="45%">
+  <br>
+  <em>Left: Vacuum Table top (pre-adding holes) &nbsp;&nbsp; Right: Vacuum table bottom</em>
+</p>
+
+The main board for this project sits on a prototyping shield for the Arduino Uno. Some key notes are the 2 100 μF, 24V caps are needed to smooth power and prevent fluctuations. These are seated under the DRV8825's in the picture. Watch out for the polarity or they will explode on you (I know this for reasons). The 3 section DIP Switch is used to set the step rate for the plotter and isnt 100% needed. I did it so that i could mess with the steps to find a good rate for micro stepping. In the end I found that $\frac{1}{4}$ stepping is more then enough for this plotter. This requires the M1 pin on the DRV8825's to be pulled HIGH. As the DRV8825 board has internal pulldown resistors the M0 and M2 pins can just be left alone, they are not required to be pulled to ground.
+
+<p align="center">
+  <img src="Assets/diagram.png" width="400"><br>
+  <em>Circuit Diagram (also see included PDF)</em>
+</p>
+
 ### Notes on Replicating the build
 
 In the assets folder you will find a Fusion file for the CAD models of this build as well as PDF drawings of important pieces and `.STEP` files. While I was building this I had access to a Prusa XL in order to print the parts for this. As such some of the vacuum chamber parts are a bit large to fit on the most common 3D printers. I also had access to an amazing machine shop that allowed me to make all the metal parts myself. The metal parts are designed to be machined without to much trouble so hopefully Send Cut Send wont charge too much. I will also include a rough parts list for the items I bought for the project and some major items I scavenged from the Mega Zero, but it will by no means be exhaustive.
@@ -56,8 +76,8 @@ In the assets folder you will find a Fusion file for the CAD models of this buil
 
 Important Notes:
  - When cutting down the 400mm Linear Rail, refer to the CAD model as the hole locations are important.
- - I got clone drv8825 stepper drivers from amazon, while I didn't have an issue there were some negative reviews. [Pololu](https://www.pololu.com/product/2133) sells the actual ones on their site and also has a great write up with how to use them (they are 5x the price though).
- - The power supply I used for the project is now out of stock the next one up is a different foot print then the one I used which might lead to some issues with the mounting plate for it and the 3D printed covers for it and the power switch.
+ - I got clone drv8825 stepper drivers from amazon, while I didn't have an issue there were some negative reviews. [Pololu](https://www.pololu.com/product/2133) sells the actual ones on their site and also has a great write up with how to use them (they are 5x the price though). **Please read their write up on how to set the step rate and how to set the current limit. They also have a video on it.**
+ - The power supply I used for the project is now out of stock the next one up is a different foot print then the one I used which might lead to some issues with the mounting plate for it and the 3D printed covers for it and the power switch. This build uses the 12V 8A version of the power supply.
  - The linear bearings listed are not of great quality. They worked better after adding more oil and running them up and down a 5mm rod, occasionally blowing them out with compressed air to remove any grit left from manufacturing.
  - All the bolts for the pullies are just m5 of different Lengths. All the m5 used in the project are Machine Thread
  - All other metric bolts are m3, the any that attach to the metal parts are machine thread (most are 8mm) and the ones that go into plastic are the self tapping kind.

@@ -7,3 +7,4 @@ current.gcode
 *.gcode
 *.pdf
 !PenPlotter_Drawing_Set.pdf
+!Circuit_Diagram.pdf
