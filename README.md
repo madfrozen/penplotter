@@ -2,7 +2,7 @@
 
 ## TODO
 
-- add args to run_printer.py
+- Add CAD files to Assets Folder
 
 ### Contents
 
@@ -85,11 +85,13 @@ Important Notes:
 | 5mm Rod | 2 | 32mm | NA
 | 5-40 Set Screws | 7 | Various lengths needed (see CAD) | NA
 | 8-32 x $\frac{5}{16}$" flush mount bolts | 2 | This is a McMASTER-CARR listing, you might find them cheaper elsewhere | [McMASTER](https://www.mcmaster.com/91253A190/)
+| 6-32 x $\frac{5}{16}$" flush mount bolts | 4 | for the power switch standoff posts | [McMASTER](https://www.mcmaster.com/91253A145/)
 | 50mm Blower fans | 1 | they move air | [Amazon](https://amzn.to/4d7X3cF)
 | Proto Boards for and Arduino Uno | 1 | work for the Uno Q too | [Amazon](https://amzn.to/4uaMVWC)
 | T-slot nuts | 1 | nothing special | [Amazon](https://amzn.to/3PlJcGv)
 | m4 x 25mm Machine bolts | 8 | To bolt the fans on | NA
 | Power Switch | 1 | I got mine off my printer, but this looks identical | [Amazon](https://amzn.to/3R4mCmo)|
+| 4mm Nylon tube | 1 | approx 1.5' long, this is for the power to get to the plot head| NA
 
 
 ## Getting The Code

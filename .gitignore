@@ -6,3 +6,4 @@ current.svg
 current.gcode
 *.gcode
 *.pdf
+!PenPlotter_Drawing_Set.pdf
