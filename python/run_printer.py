@@ -46,4 +46,4 @@ ARGS = ""
 if VERBOSE:
     ARGS += verbose_arg
 
-run(f"python3 python/send_gcode.py current.gcode {'-'+ ARGS if ARGS else ''}")
+run(f"python3 {BASE}/python/send_gcode.py {gcode} {'-' + ARGS if ARGS else ''}")

@@ -192,10 +192,10 @@ scp path_to_file/file.pdf arduino@[boardname].local:~/ArduinoApps/penplotter
 
 This will put your file into the proper directory on your Uno Q.
 
-To run the plotter `ssh` in the board and `cd` into the `penplotter` directory. From there you can run:
+To run the plotter `ssh` in the board and run `plot`:
 
 ```bash
-plot [any args here] [name of file here] 
+plot [any args here] [path to file here] 
 ```
 
 You will see a print out of what the slicer is doing and a rolling percentage complete of the plot job.
