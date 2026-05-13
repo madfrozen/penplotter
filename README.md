@@ -181,6 +181,8 @@ bash upload.sh
 
 ## Using the plotter
 
+Before you start a plot make sure the pen is in the correct position. All the way to the rear and the right is where it thinks it is every time it starts a plot. The small cutout on the front, center of the drawing board is 1mm lower then the drawing surface. When putting a pen in the holder, bottom it out here so that it has an extra 1mm of travel to account for any board unevenness.
+
 You will need to put the pdf file that you want to plot on to the board.
 
 ```bash
@@ -190,10 +192,17 @@ scp path_to_file/file.pdf arduino@[boardname].local:~/ArduinoApps/penplotter
 
 This will put your file into the proper directory on your Uno Q.
 
-To run the plotter make sure that you are in the `penplotter` directory and run:
+To run the plotter `ssh` in the board and `cd` into the `penplotter` directory. From there you can run:
 
 ```bash
-plot [name of file here] [any args here]
+plot [any args here] [name of file here] 
 ```
 
 You will see a print out of what the slicer is doing and a rolling percentage complete of the plot job.
+
+Possible args include
+| Arg | Effect |
+|-----|--------|
+|-v| Verbose mode to print all Gcode lines being streamed |
+|-h | Print help dialog |
+|-w|PLot lines first then text (slower but cooler to look at)|
