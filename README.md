@@ -156,8 +156,8 @@ Add it to your path
 
 ```bash
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-# This will add an alias so that you don't have to call python3 every time
-echo "alias plot='python3 ~/ArduinoApps/penplotter/python/run_printer.py'" >> ~/.bashrc
+# This will add an alias so that you don't have to call python3 every time, it also checks to make sure its not already there
+grep -q "alias plot=" ~/.bashrc || echo "alias plot='python3 ~/ArduinoApps/penplotter/python/run_printer.py'" >> ~/.bashrc
 source ~/.bashrc
 ```
 
