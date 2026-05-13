@@ -67,8 +67,7 @@ Important Notes:
 
 
 ### Parts List
-
-<div style="display:flex; justify-content:center">
+*All Amazon links are affiliate links*
 
 | Part | Quantity | Notes | Link |
 |------|----------|-------|------|
@@ -90,9 +89,8 @@ Important Notes:
 | Proto Boards for and Arduino Uno | 1 | work for the Uno Q too | [Amazon](https://amzn.to/4uaMVWC)
 | T-slot nuts | 1 | nothing special | [Amazon](https://amzn.to/3PlJcGv)
 | m4 x 25mm Machine bolts | 8 | To bolt the fans on | NA
-| Power Switch | 1 | I got mine off my printer, but this looks identical | [Amazon](https://amzn.to/3R4mCmo)
+| Power Switch | 1 | I got mine off my printer, but this looks identical | [Amazon](https://amzn.to/3R4mCmo)|
 
-</div>
 
 ## Getting The Code
 
